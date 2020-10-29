@@ -63,7 +63,7 @@ const HomePage = () => {
     </Typography>
     <Typography>{user.name}  &nbsp; &nbsp;</Typography>
     <Avatar alt={user.name} src={user.picture} />
-    {/* <Button color="inherit" onClick={() => (logout())}>Log Out</Button> */}
+    <Button color="inherit" onClick={() => (logout())}>Log Out</Button>
   </Toolbar>
 </AppBar>
 </ThemeProvider>
