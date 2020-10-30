@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/name_of_your_DB", {
+mongoose.connect("mongodb://localhost/bb4kitems", {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 })

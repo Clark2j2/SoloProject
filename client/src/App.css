@@ -64,3 +64,18 @@
     text-align: center;
     color: chocolate;
 }
+.loginimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%; 
+}
+.loginbutton{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+.tablehead{
+  font-weight: bold;
+}
