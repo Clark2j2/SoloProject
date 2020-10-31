@@ -6,6 +6,7 @@ import {Router} from '@reach/router'
 import HomePage from './components/HomePage';
 import {useAuth0} from '@auth0/auth0-react';
 import Home from './components/HomePage'
+import AddForm from './components/AddForm'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     </>
     <Router>
       <Home path="/" />
+      <AddForm path="/add/" />
     </Router>
     </div>
   );

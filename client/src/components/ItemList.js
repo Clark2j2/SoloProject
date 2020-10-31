@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react';
+import {navigate} from '@reach/router'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios'
-import { red } from '@material-ui/core/colors';
+import Button from '@material-ui/core/Button'
 
 
 
@@ -67,10 +68,15 @@ const rows = [
         </TableHead>
         <TableBody>
           {item.map((row,idx) => (
-            <TableRow key={row.name}>
+            <TableRow key={row._id}>
               <TableCell component="th" scope="row">{row.item}</TableCell>
               <TableCell align="right">{row.description}</TableCell>
               <TableCell align="right">{row.brand}</TableCell>
+              <TableCell align="right">
+                <Button onClick={navigate.bind(this, '/edit/'+row._id)}>
+                Details
+                </Button>
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>

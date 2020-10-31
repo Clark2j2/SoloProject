@@ -69,6 +69,12 @@ const UserSchema = new mongoose.Schema({
 	quickBooks: {
 		type: Boolean
 	},
+	physicalLocation: {
+		type: String
+	},
+	notes: {
+		type: String
+	},
 }, {timestamps:true});
 
 const User = mongoose.model("User", UserSchema);

@@ -1,4 +1,5 @@
 import React from 'react'
+import {navigate} from '@reach/router'
 import {useAuth0} from '@auth0/auth0-react'
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -61,6 +62,9 @@ const HomePage = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const goToAddItem = () =>{
+    navigate('/add/')
+  }
 
   return (
     isAuthenticated && (
@@ -93,7 +97,7 @@ const HomePage = () => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Add Item</MenuItem>
+                <MenuItem onClick={goToAddItem}>Add Item</MenuItem>
                 <MenuItem onClick={() => (logout())}>Sign Out</MenuItem>
               </Menu>
             </div>
