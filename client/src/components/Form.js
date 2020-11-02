@@ -5,10 +5,11 @@ import 'fontsource-roboto'
 import Typography from '@material-ui/core/Typography';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
 import axios from 'axios'
 import Button from '@material-ui/core/Button'
 import { navigate } from '@reach/router';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,7 +69,7 @@ export default props =>{
     const [donateToEmail, setDonateToEmail] = useState();
     const [donateToPhoneNumber, setDonateToPhoneNumber] = useState();
     const [donateToAddress, setDonateToAddress] = useState();
-    const [taxForm, setTaxForm] = useState();
+    const [taxForm, setTaxForm] = React.useState(false);
     const [thankYou, setThankYou] = useState();
     const [quickBooks, setQuickBooks] = useState();
     const [physicalLocation, setPhysicalLocation] = useState();
@@ -79,15 +80,11 @@ export default props =>{
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
     };
-    const [state, setState] = React.useState({
-        checkedA: true,
-        checkedB: true,
-        checkedF: true,
-        
-    });
+    
 
     const onSubmitHandler = (e) =>{
         e.preventDefault();
+        console.log(taxForm);
         axios.post('http://localhost:8000/api/users/new', {
             dateIn: dateIn,
             dateOut: dateOut,
@@ -104,6 +101,9 @@ export default props =>{
             donateToEmail: donateToEmail,
             donateToPhoneNumber: donateToPhoneNumber,
             donateToAddress: donateToAddress,
+            taxForm: taxForm,
+            thankYou: thankYou,
+            quickBooks: quickBooks,
             physicalLocation: physicalLocation,
             notes: notes
         })
@@ -122,19 +122,28 @@ export default props =>{
         })
     }
 
+    const [state, setState] = React.useState({
+        checkedA: {taxForm},
+        checkedB: true,
+      });
+
     const navigateHome = ()=>{
         navigate('/');
     }
+    const handleChange1 = (event) =>{
+        setTaxForm(event.target.checked)}
     return(
         <div className={classes.root}>
             <form  noValidate autoComplete='false' onSubmit={onSubmitHandler}>
-                <br /><TextField
+                <br />
+                <TextField
                     id="date"
                     label="Date In"
                     type="date"
                     defaultValue="2020-01-01"
                     className={classes.dateField}
                     onChange={e=>setDateIn(e.target.value)}
+                    format={'DD/MM/YYYY'}
                     InputLabelProps={{
                 shrink: true,
             }}
@@ -172,9 +181,17 @@ export default props =>{
                 <TextField id="standard-basic" label="Phone Number" className={classes.container} onChange={e=>setDonateToPhoneNumber(e.target.value)}/>
                 <TextField id="standard-basic" label="Street Address" className={classes.container} onChange={e=>setDonateToAddress(e.target.value)}/><br />
                 
-                <FormGroup row className={classes.checkbox}>
+                <p>{String(taxForm)}</p>
+                <Switch
+                    checked={taxForm}
+                    onChange={handleChange1}
+                    name="TaxForm" 
+                    
+                    />
+                    
+                    {/* <FormGroup row className={classes.checkbox}>
                     <FormControlLabel
-                        control={<Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" color="primary" className={classes.container}/>}
+                        control={<Checkbox checked={state.checkedA} onChange={e=>setTaxForm(e.target.value)} name="checkedA" color="primary" className={classes.container}/>}
                         label="Tax form sent to donor?"
                     /><br />
                     <FormControlLabel
@@ -185,7 +202,8 @@ export default props =>{
                         control={<Checkbox checked={state.checkedF} onChange={handleChange} name="checkedA" color="primary" className={classes.container}/>}
                         label="Entered in QuickBooks?"
                     />
-                </FormGroup>
+                </FormGroup> */}
+            
                 <TextField id="standard-basic" label="Physical BB4K Location" className={classes.container} onChange={e=>setPhysicalLocation(e.target.value)}/>
                 <TextField id="standard-basic" label="Notes" className={classes.container} onChange={e=>setNotes(e.target.value)}/><br />
                 <Button variant="contained" color="primary" className={classes.submit} type="submit" >

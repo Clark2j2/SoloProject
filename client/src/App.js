@@ -7,6 +7,7 @@ import HomePage from './components/HomePage';
 import {useAuth0} from '@auth0/auth0-react';
 import Home from './components/HomePage'
 import AddForm from './components/AddForm'
+import DetailPage from './components/DetailPage';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
     <Router>
       <Home path="/" />
       <AddForm path="/add/" />
+      <DetailPage path="/edit/:id" />
     </Router>
     </div>
   );
