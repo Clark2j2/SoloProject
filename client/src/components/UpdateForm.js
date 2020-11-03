@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import 'fontsource-roboto'
@@ -54,35 +54,44 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 export default props =>{
-    const [dateIn, setDateIn] = useState("");
-    const [dateOut, setDateOut] = useState("");
-    const [whoDonated, setWhoDonated] = useState("");
-    const [donorEmail, setDonorEmail] = useState("");
-    const [donorPhoneNumber, setDonorPhoneNumber] = useState("");
-    const [donorAddress, setDonorAddress] = useState("");
+    const [object, setObject] = useState();
+    const [dateIn, setDateIn] = useState();
+    const [dateOut, setDateOut] = useState();
+    const [whoDonated, setWhoDonated] = useState();
+    const [donorEmail, setDonorEmail] = useState();
+    const [donorPhoneNumber, setDonorPhoneNumber] = useState();
+    const [donorAddress, setDonorAddress] = useState();
     const [item, setItem] = useState("");
     const [brand, setBrand] = useState("");
     const [description, setDescription] = useState("");
     const [serialNumber, setSerialNumber] = useState("");
-    const [value, setValue] = useState("");
-    const [donateToName, setDonateToName] = useState("");
-    const [donateToEmail, setDonateToEmail] = useState("");
-    const [donateToPhoneNumber, setDonateToPhoneNumber] = useState("");
-    const [donateToAddress, setDonateToAddress] = useState("");
+    const [value, setValue] = useState();
+    const [donateToName, setDonateToName] = useState();
+    const [donateToEmail, setDonateToEmail] = useState();
+    const [donateToPhoneNumber, setDonateToPhoneNumber] = useState();
+    const [donateToAddress, setDonateToAddress] = useState();
     const [taxForm, setTaxForm] = React.useState(false);
-    const [thankYou, setThankYou] = useState("");
-    const [quickBooks, setQuickBooks] = useState("");
-    const [physicalLocation, setPhysicalLocation] = useState("");
-    const [notes, setNotes] = useState("");
-    const [errs, setErrs] = useState("");
+    const [thankYou, setThankYou] = useState();
+    const [quickBooks, setQuickBooks] = useState();
+    const [physicalLocation, setPhysicalLocation] = useState();
+    const [notes, setNotes] = useState();
+    const [errs, setErrs] = useState();
 
     const classes = useStyles();
     
+    useEffect(() =>{
+        axios.get("http://localhost:8000/api/users/" + props.id)
+        .then(res=>{
+            setObject(res.data.users)
+            console.log(res.data.users)})
+        .catch((err) =>{
+            console.log(err)
+        })
+    }, [])
 
     const onSubmitHandler = (e) =>{
         e.preventDefault();
-        console.log(taxForm);
-        axios.post('http://localhost:8000/api/users/new', {
+        axios.put('http://localhost:8000/api/users/update/' + props.id, {
             dateIn: dateIn,
             dateOut: dateOut,
             whoDonated: whoDonated,
@@ -99,8 +108,8 @@ export default props =>{
             donateToPhoneNumber: donateToPhoneNumber,
             donateToAddress: donateToAddress,
             taxForm: taxForm,
-            // thankYou: thankYou,
-            // quickBooks: quickBooks,
+            thankYou: thankYou,
+            quickBooks: quickBooks,
             physicalLocation: physicalLocation,
             notes: notes
         })

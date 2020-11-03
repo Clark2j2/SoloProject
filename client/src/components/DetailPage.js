@@ -81,8 +81,19 @@ const useStyles = makeStyles((theme) => ({
       }
 
     const goToHome =() =>{
-        navigate('/')
+      navigate('/');
+        console.log(item.taxForm);
     }
+    const updateItem =()=>{
+      navigate('/update/' + props.id)
+    }
+    
+
+    const helpMe =()=>{
+      console.log(item);
+    }
+  
+
     return(
             isAuthenticated && (
     <div className={classes.root}>
@@ -128,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
         </Toolbar>
       </AppBar>
       </ThemeProvider>
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary" onClick={updateItem}>
   Update Item
 </Button>
 <Button variant="contained" color="secondary" onClick={deleteItem}>
@@ -150,11 +161,9 @@ const useStyles = makeStyles((theme) => ({
 <Typography>Phone Number: {item.donateToPhoneNumber}</Typography>
 <Typography>Address: {item.donateToAddress}</Typography>
 <Typography>Tax form sent to donor?: {item.taxForm}</Typography>
-<Switch
-                    value={item.taxForm}
-                    disabled="true"
-                    name="TaxForm" 
-                    />
+<button onClick={helpMe}></button>
+
+
     </div>
   ));
 }

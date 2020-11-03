@@ -1,15 +1,21 @@
-import React, {useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import 'fontsource-roboto'
-import Typography from '@material-ui/core/Typography';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import {navigate} from '@reach/router'
+import {useAuth0} from '@auth0/auth0-react'
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Avatar from '@material-ui/core/Avatar';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { MenuItem } from '@material-ui/core/';
+import Menu from '@material-ui/core/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import TextField from '@material-ui/core/TextField';
+import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button'
-import { navigate } from '@reach/router';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,60 +57,83 @@ const useStyles = makeStyles((theme) => ({
     },
     input: {
         width: '300px'
-    }
+    },
+    root: {
+        flexGrow: 1,
+      },
+      menuButton: {
+        marginRight: theme.spacing(2),
+      },
+      title: {
+        flexGrow: 1,
+      },
   }));
-export default props =>{
-    const [dateIn, setDateIn] = useState("");
-    const [dateOut, setDateOut] = useState("");
-    const [whoDonated, setWhoDonated] = useState("");
-    const [donorEmail, setDonorEmail] = useState("");
-    const [donorPhoneNumber, setDonorPhoneNumber] = useState("");
-    const [donorAddress, setDonorAddress] = useState("");
-    const [item, setItem] = useState("");
-    const [brand, setBrand] = useState("");
-    const [description, setDescription] = useState("");
-    const [serialNumber, setSerialNumber] = useState("");
-    const [value, setValue] = useState("");
-    const [donateToName, setDonateToName] = useState("");
-    const [donateToEmail, setDonateToEmail] = useState("");
-    const [donateToPhoneNumber, setDonateToPhoneNumber] = useState("");
-    const [donateToAddress, setDonateToAddress] = useState("");
-    const [taxForm, setTaxForm] = React.useState(false);
-    const [thankYou, setThankYou] = useState("");
-    const [quickBooks, setQuickBooks] = useState("");
-    const [physicalLocation, setPhysicalLocation] = useState("");
-    const [notes, setNotes] = useState("");
-    const [errs, setErrs] = useState("");
 
+export default props => {
+    const [object, setObject] = useState({});
+    const [dateIn, setDateIn] = useState();
+    const [dateOut, setDateOut] = useState();
+    const [whoDonated, setWhoDonated] = useState({});
+    const [donorEmail, setDonorEmail] = useState();
+    const [donorPhoneNumber, setDonorPhoneNumber] = useState();
+    const [donorAddress, setDonorAddress] = useState();
+    const [item, setItem] = useState();
+    const [brand, setBrand] = useState();
+    const [description, setDescription] = useState();
+    const [serialNumber, setSerialNumber] = useState();
+    const [value, setValue] = useState();
+    const [donateToName, setDonateToName] = useState();
+    const [donateToEmail, setDonateToEmail] = useState();
+    const [donateToPhoneNumber, setDonateToPhoneNumber] = useState();
+    const [donateToAddress, setDonateToAddress] = useState();
+    const [taxForm, setTaxForm] = React.useState(false);
+    const [thankYou, setThankYou] = useState();
+    const [quickBooks, setQuickBooks] = useState();
+    const [physicalLocation, setPhysicalLocation] = useState();
+    const [notes, setNotes] = useState();
+    const [errs, setErrs] = useState();
+    const {isAuthenticated} = useAuth0();
+    const {user,logout} = useAuth0();
     const classes = useStyles();
+
     
+    useEffect(() =>{
+        axios.get("http://localhost:8000/api/users/" + props.id)
+        .then(res=>{
+            setObject(res.data.user);
+            })
+        .catch((err) =>{
+            console.log(err)
+            })
+    }, [props.id]);
 
     const onSubmitHandler = (e) =>{
         e.preventDefault();
-        console.log(taxForm);
-        axios.post('http://localhost:8000/api/users/new', {
-            dateIn: dateIn,
-            dateOut: dateOut,
-            whoDonated: whoDonated,
-            donorEmail: donorEmail,
-            donorPhonenumber: donorPhoneNumber,
-            donorAddress: donorAddress,
-            item: item,
-            brand: brand,
-            description: description,
-            serialNumber: serialNumber,
-            value: value,
-            donateToName: donateToName,
-            donateToEmail: donateToEmail,
-            donateToPhoneNumber: donateToPhoneNumber,
-            donateToAddress: donateToAddress,
-            taxForm: taxForm,
-            // thankYou: thankYou,
-            // quickBooks: quickBooks,
-            physicalLocation: physicalLocation,
-            notes: notes
-        })
-        .then((res) =>{
+        const donatedItem = {whoDonated};
+        axios.put('http://localhost:8000/api/users/update/${props.id}', donatedItem)
+        // axios.put('http://localhost:8000/api/users/update/' + props.id, {
+        //     dateIn: dateIn,
+        //     dateOut: dateOut,
+        //     whoDonated: whoDonated,
+        //     donorEmail: donorEmail,
+        //     donorPhonenumber: donorPhoneNumber,
+        //     donorAddress: donorAddress,
+        //     item: item,
+        //     brand: brand,
+        //     description: description,
+        //     serialNumber: serialNumber,
+        //     value: value,
+        //     donateToName: donateToName,
+        //     donateToEmail: donateToEmail,
+        //     donateToPhoneNumber: donateToPhoneNumber,
+        //     donateToAddress: donateToAddress,
+        //     taxForm: taxForm,
+        //     thankYou: thankYou,
+        //     quickBooks: quickBooks,
+        //     physicalLocation: physicalLocation,
+        //     notes: notes
+        // })
+        .then(res =>{
             if (res.data.error) {
                 console.log(res.data.error.errors)
                 setErrs(res.data.error.errors);
@@ -118,16 +147,93 @@ export default props =>{
             console.log(err);
         })
     }
-
     const navigateHome = ()=>{
         navigate('/');
     }
-
     const taxValue = (e, val) =>{
         setTaxForm(val)
     }    
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+      const handleClose = () => {
+        setAnchorEl(null);
+      };
+      const takeMeHome = () =>{
+        navigate('/');
+      }
+      const helpMe =()=>{
+          console.log(object.whoDonated)
+      }
+      const [anchorEl, setAnchorEl] = React.useState(null);
+      const open = Boolean(anchorEl);
+      const [auth, setAuth] = React.useState(true);
+    //   const useStyles = makeStyles((theme) => ({
+        
+    //   }));
+      const theme = createMuiTheme({
+        palette: {
+          primary: {
+            light: '#757ce8',
+            main: '#ff9900',
+            dark: '#002884',
+            contrastText: 'fff#',
+          },
+          secondary: {
+            light: '#ff7961',
+            main: '#f44336',
+            dark: '#ba000d',
+            contrastText: '#000',
+          },
+        },
+      });
+      
     return(
-        <div className={classes.root}>
+            isAuthenticated && (
+    <div className={classes.root}>
+      <ThemeProvider theme={theme}>
+      <AppBar position="static">
+        <Toolbar>
+          {auth && (
+            <div><IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <MenuIcon
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit">
+                <AccountCircle />
+              </MenuIcon></IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={takeMeHome}>Take Me Home</MenuItem>
+                <MenuItem onClick={() => (logout())}>Sign Out</MenuItem>
+              </Menu>
+            </div>
+          )}
+          <Typography variant="h6" className={classes.title}>
+            Building Blocks - Update {object.item}
+          </Typography>
+          <Typography>{user.name}  &nbsp; &nbsp;</Typography>
+          <Avatar alt={user.name} src={user.picture} />
+        </Toolbar>
+      </AppBar>
+      <button onClick={helpMe}>Help</button>
+      </ThemeProvider>
+      <div className={classes.root}>
             <form  noValidate autoComplete='false' onSubmit={onSubmitHandler}>
                 <br />
                 <TextField
@@ -153,7 +259,7 @@ export default props =>{
                 shrink: true,
             }}
                 />
-                <br /><TextField id="standard-basic" label="Who donated?" className={classes.nameField} onChange={e=>setWhoDonated(e.target.value)} />
+                <br /><TextField id="standard-basic" label="Who donated?" className={classes.nameField} onChange={e=>setWhoDonated(e.target.value)} value={object.whoDonated} />
                 <TextField id="standard-basic" label="Email Address" type="email" className={classes.container} onChange={e=>setDonorEmail(e.target.value)}/>
                 <TextField id="standard-basic" label="Phone Number" className={classes.container} onChange={e=>setDonorPhoneNumber(e.target.value)}/>
                 <TextField id="standard-basic" label="Street Address" className={classes.container} onChange={e=>setDonorAddress(e.target.value)}/><br />
@@ -203,5 +309,7 @@ export default props =>{
                 </Button>
             </form>
         </div>
-    )
+      </div>
+
+  ));
 }
