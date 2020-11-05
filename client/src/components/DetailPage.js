@@ -10,11 +10,13 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Avatar from '@material-ui/core/Avatar';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { MenuItem } from '@material-ui/core/';
+import { Checkbox, MenuItem } from '@material-ui/core/';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button'
 import Switch from '@material-ui/core/Switch';
+import TextField from '@material-ui/core/TextField'
+import moment from 'moment'
 export default props =>{
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
     const [item, setItem] = useState([]);
 
     useEffect(() =>{
-
         axios.get("http://localhost:8000/api/users/" + props.id)
             .then(res => setItem(res.data.user))
     }, [])
@@ -144,24 +145,42 @@ const useStyles = makeStyles((theme) => ({
 </Button>
 <Button variant="contained" color="secondary" onClick={deleteItem}>
   Remove from inventory
-</Button>
-<Typography>Date In: {item.dateIn}</Typography>
+</Button> <br />
+<Typography>Date In: {moment(item.dateIn).isValid() ? moment(item.dateIn).format('LL'): null}</Typography>
 <Typography>Date Out: {item.dateOut}</Typography>
 <Typography>Who Donated: {item.whoDonated}</Typography>
 <Typography>Email: {item.donorEmail}</Typography>
 <Typography>Phone Number: {item.donorPhoneNumber}</Typography>
 <Typography>Address: {item.donorAddress}</Typography>
+<Typography variant="h4" gutterBottom className={classes.Typography1}>
+  Equipment Info
+</Typography>
 <Typography>Item: {item.item}</Typography>
 <Typography>Brand: {item.brand}</Typography>
 <Typography>Description: {item.description}</Typography>
 <Typography>Serial Number: {item.serialNumber}</Typography>
 <Typography>Value: {item.value}</Typography>
+<Typography variant="h4" gutterBottom className={classes.Typography1}>
+  Donated to:
+</Typography>
 <Typography>Name: {item.donateToName}</Typography>
 <Typography>Email: {item.donateToEmail}</Typography>
 <Typography>Phone Number: {item.donateToPhoneNumber}</Typography>
 <Typography>Address: {item.donateToAddress}</Typography>
+<Switch
+        checked={typeof item.taxForm !== 'undefined' ? item.taxForm : false}
+        color="default"
+        inputProps={{ 'aria-label': 'checkbox with default color' }}
+/>
 <Typography>Tax form sent to donor?: {item.taxForm}</Typography>
-<button onClick={helpMe}></button>
+<Typography>Thank You sent? {item.thankYou}</Typography>
+<Typography>Entered in QuickBooks? {item.quickBooks}</Typography>
+<Typography>Physical Location: {item.physicalLocation}</Typography>
+<Typography>Notes: {item.notes}</Typography>
+<Button variant="contained" color="primary" onClick={updateItem}>
+  Update Item
+</Button>
+<button onClick={helpMe}>Help</button>
 
 
     </div>

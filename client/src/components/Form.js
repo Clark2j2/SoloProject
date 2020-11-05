@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 export default props =>{
-    const [dateIn, setDateIn] = useState("");
-    const [dateOut, setDateOut] = useState("");
+    const [dateIn, setDateIn] = useState();
+    const [dateOut, setDateOut] = useState();
     const [whoDonated, setWhoDonated] = useState("");
     const [donorEmail, setDonorEmail] = useState("");
     const [donorPhoneNumber, setDonorPhoneNumber] = useState("");
@@ -134,7 +134,6 @@ export default props =>{
                     id="date"
                     label="Date In"
                     type="date"
-                    defaultValue="2020-01-01"
                     className={classes.dateField}
                     onChange={e=>setDateIn(e.target.value)}
                     format={'DD/MM/YYYY'}
@@ -146,9 +145,9 @@ export default props =>{
                     id="date"
                     label="Date Out"
                     type="date"
-                    defaultValue="2020-01-01"
                     className={classes.dateField}
                     onChange={e=>setDateOut(e.target.value)}
+                    error={dateOut < dateIn}
                     InputLabelProps={{
                 shrink: true,
             }}

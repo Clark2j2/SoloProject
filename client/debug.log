@@ -1,3 +1,9 @@
 [1030/103919.155:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1102/151152.438:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\clown\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\f7b53f39-a223-4ddb-822c-f8cd7b84631c: The system cannot find the path specified. (0x3)
 [1102/151152.444:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1103/130439.270:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1103/130439.277:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1103/130439.279:ERROR:exception_snapshot_win.cc(99)] thread ID 16452 not found in process
+[1103/130439.279:ERROR:exception_snapshot_win.cc(99)] thread ID 17592 not found in process
+[1103/130439.360:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1103/130439.360:ERROR:exception_snapshot_win.cc(99)] thread ID 17464 not found in process
