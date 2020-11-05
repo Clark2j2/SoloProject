@@ -16,6 +16,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import TextField from '@material-ui/core/TextField';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button'
+import { InlineWrapper } from '@material-ui/pickers/wrappers/InlineWrapper';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,53 +28,58 @@ const useStyles = makeStyles((theme) => ({
       width: '300',
       marginLeft: theme.spacing(10),
       marginRight: theme.spacing(10),
+      marginBottom: "20px"
     },
-    dateField: {
-      marginLeft: '100px',
-      marginRight: '80px',
-      width: '142px',
-      paddingRight: '50px'
-       
+    dateField1: {
+      marginLeft: "19%",
+      width: '241px',
+      paddingBottom: '50px'
+    },
+    dateField2: {
+      marginLeft: '10%',
+      width: '253px',
     },
     nameField: {
-        marginLeft: theme.spacing(34),
+        marginLeft: theme.spacing(10),
         marginRight: theme.spacing(10),
+        marginBottom: "2px",
     },
     Typography1: {
-        marginLeft: theme.spacing(30),
+        marginLeft: "36%",
     },
     Typography2: {
-        marginLeft: theme.spacing(33),
+        marginLeft: "38%",
     },
     checkbox: {
-        display: 'block',
+        display: 'inline',
     },
     submit: {
-        display: 'inline-block',
-        position: 'absolute',
-        bottom: '0px',
-        right: '50px',
-        
+        float: "right",
+        margin: "20px"
     },
     input: {
         width: '300px'
     },
     root: {
-        flexGrow: 1,
-      },
-      menuButton: {
-        marginRight: theme.spacing(2),
-      },
-      title: {
-        flexGrow: 1,
-      },
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+    switchLabel: {
+      display: "inline"
+    }
+      
   }));
 
+
 export default props => {
-    const [object, setObject] = useState({});
     const [dateIn, setDateIn] = useState();
     const [dateOut, setDateOut] = useState();
-    const [whoDonated, setWhoDonated] = useState({});
+    const [whoDonated, setWhoDonated] = useState("");
     const [donorEmail, setDonorEmail] = useState();
     const [donorPhoneNumber, setDonorPhoneNumber] = useState();
     const [donorAddress, setDonorAddress] = useState();
@@ -87,8 +93,8 @@ export default props => {
     const [donateToPhoneNumber, setDonateToPhoneNumber] = useState();
     const [donateToAddress, setDonateToAddress] = useState();
     const [taxForm, setTaxForm] = React.useState(false);
-    const [thankYou, setThankYou] = useState();
-    const [quickBooks, setQuickBooks] = useState();
+    const [thankYou, setThankYou] = React.useState(false);
+    const [quickBooks, setQuickBooks] = React.useState(false);
     const [physicalLocation, setPhysicalLocation] = useState();
     const [notes, setNotes] = useState();
     const [errs, setErrs] = useState();
@@ -100,39 +106,56 @@ export default props => {
     useEffect(() =>{
         axios.get("http://localhost:8000/api/users/" + props.id)
         .then(res=>{
-            setObject(res.data.user);
+          setDateIn(res.data.user.dateIn);
+          setDateOut(res.data.user.dateOut);
+          setWhoDonated(res.data.user.whoDonated);
+          setDonorEmail(res.data.user.donorEmail);
+          setDonorAddress(res.data.user.donorAddress);
+          setDonorPhoneNumber(res.data.user.phoneNumber);
+          setItem(res.data.user.item);
+          setBrand(res.data.user.brand);
+          setDescription(res.data.user.description);
+          setSerialNumber(res.data.user.serialNumber);
+          setValue(res.data.user.value);
+          setDonateToName(res.data.user.donateToName);
+          setDonateToEmail(res.data.user.donateToEmail);
+          setDonateToPhoneNumber(res.data.user.donateToPhoneNumber);
+          setDonateToAddress(res.data.user.donateToAddress);
+          setTaxForm(res.data.user.taxForm);
+          setThankYou(res.data.user.thankYou);
+          setQuickBooks(res.data.user.quickBooks);
+          setPhysicalLocation(res.data.user.physicalLocation);
+          setNotes(res.data.user.notes);
             })
         .catch((err) =>{
             console.log(err)
             })
-    }, [props.id]);
+    }, []);
 
     const onSubmitHandler = (e) =>{
         e.preventDefault();
-        const donatedItem = {whoDonated};
-        axios.put('http://localhost:8000/api/users/update/${props.id}', donatedItem)
-        // axios.put('http://localhost:8000/api/users/update/' + props.id, {
-        //     dateIn: dateIn,
-        //     dateOut: dateOut,
-        //     whoDonated: whoDonated,
-        //     donorEmail: donorEmail,
-        //     donorPhonenumber: donorPhoneNumber,
-        //     donorAddress: donorAddress,
-        //     item: item,
-        //     brand: brand,
-        //     description: description,
-        //     serialNumber: serialNumber,
-        //     value: value,
-        //     donateToName: donateToName,
-        //     donateToEmail: donateToEmail,
-        //     donateToPhoneNumber: donateToPhoneNumber,
-        //     donateToAddress: donateToAddress,
-        //     taxForm: taxForm,
-        //     thankYou: thankYou,
-        //     quickBooks: quickBooks,
-        //     physicalLocation: physicalLocation,
-        //     notes: notes
-        // })
+        axios.put('http://localhost:8000/api/users/update/' + props.id, {
+            dateIn: dateIn,
+            dateOut: dateOut,
+            whoDonated: whoDonated,
+            donorEmail: donorEmail,
+            donorPhonenumber: donorPhoneNumber,
+            donorAddress: donorAddress,
+            item: item,
+            brand: brand,
+            description: description,
+            serialNumber: serialNumber,
+            value: value,
+            donateToName: donateToName,
+            donateToEmail: donateToEmail,
+            donateToPhoneNumber: donateToPhoneNumber,
+            donateToAddress: donateToAddress,
+            taxForm: taxForm,
+            thankYou: thankYou,
+            quickBooks: quickBooks,
+            physicalLocation: physicalLocation,
+            notes: notes
+        })
         .then(res =>{
             if (res.data.error) {
                 console.log(res.data.error.errors)
@@ -150,9 +173,15 @@ export default props => {
     const navigateHome = ()=>{
         navigate('/');
     }
-    const taxValue = (e, val) =>{
-        setTaxForm(val)
-    }    
+    // const taxValue = (e, val) =>{
+    //     setTaxForm(val)
+    // }    
+    // const thankYouValue = (e, val) =>{
+    //   setThankYou(val)
+    // }    
+    // const quickBooksValue = (e, val) =>{
+    //   setQuickBooks(val)
+    // }  
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
       };
@@ -162,15 +191,9 @@ export default props => {
       const takeMeHome = () =>{
         navigate('/');
       }
-      const helpMe =()=>{
-          console.log(object.whoDonated)
-      }
       const [anchorEl, setAnchorEl] = React.useState(null);
       const open = Boolean(anchorEl);
       const [auth, setAuth] = React.useState(true);
-    //   const useStyles = makeStyles((theme) => ({
-        
-    //   }));
       const theme = createMuiTheme({
         palette: {
           primary: {
@@ -225,23 +248,23 @@ export default props => {
             </div>
           )}
           <Typography variant="h6" className={classes.title}>
-            Building Blocks - Update {object.item}
+            Building Blocks - Update {item}
           </Typography>
           <Typography>{user.name}  &nbsp; &nbsp;</Typography>
           <Avatar alt={user.name} src={user.picture} />
         </Toolbar>
       </AppBar>
-      <button onClick={helpMe}>Help</button>
       </ThemeProvider>
       <div className={classes.root}>
             <form  noValidate autoComplete='false' onSubmit={onSubmitHandler}>
                 <br />
+                <div className="dateInputs">
                 <TextField
                     id="date"
-                    label="Date In"
+                    label="Select New Date In (if applicable)"
                     type="date"
-                    defaultValue="2020-01-01"
-                    className={classes.dateField}
+                    value={dateIn}
+                    className={classes.dateField1}
                     onChange={e=>setDateIn(e.target.value)}
                     format={'DD/MM/YYYY'}
                     InputLabelProps={{
@@ -249,63 +272,68 @@ export default props => {
             }}
                 />
                 <TextField
-                    id="date"
-                    label="Date Out"
-                    type="date"
-                    defaultValue="2020-01-01"
-                    className={classes.dateField}
-                    onChange={e=>setDateOut(e.target.value)}
-                    InputLabelProps={{
-                shrink: true,
-            }}
+                  id="date"
+                  label="Select New Date Out (if applicable)"
+                  type="date"
+                  value={dateOut}
+                  className={classes.dateField2}
+                  onChange={e=>setDateOut(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
-                <br /><TextField id="standard-basic" label="Who donated?" className={classes.nameField} onChange={e=>setWhoDonated(e.target.value)} value={object.whoDonated} />
-                <TextField id="standard-basic" label="Email Address" type="email" className={classes.container} onChange={e=>setDonorEmail(e.target.value)}/>
-                <TextField id="standard-basic" label="Phone Number" className={classes.container} onChange={e=>setDonorPhoneNumber(e.target.value)}/>
-                <TextField id="standard-basic" label="Street Address" className={classes.container} onChange={e=>setDonorAddress(e.target.value)}/><br />
+                </div>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Who donated?" className={classes.nameField} onChange={e=>setWhoDonated(e.target.value)} value={whoDonated} />
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Email Address" type="email" className={classes.nameField} onChange={e=>setDonorEmail(e.target.value)} value={donorEmail}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Phone Number" className={classes.nameField} onChange={e=>setDonorPhoneNumber(e.target.value)} value={donorPhoneNumber}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Street Address" className={classes.nameField} onChange={e=>setDonorAddress(e.target.value)} value={donorAddress}/><br />
             
                 <Typography variant="h4" gutterBottom className={classes.Typography1}>
                     Equipment Info
                 </Typography>
-                <TextField id="standard-basic" label="Item" className={classes.container} onChange={e=>setItem(e.target.value)}/>
-                <TextField id="standard-basic" label="Brand" className={classes.container} onChange={e=>setBrand(e.target.value)}/>
-                <TextField id="standard-basic" label="Description" className={classes.container} onChange={e=>setDescription(e.target.value)}/>
-                <TextField id="standard-basic" label="Serial Number" className={classes.container} onChange={e=>setSerialNumber(e.target.value)}/>
-                <TextField id="standard-basic" label="Value" className={classes.container} onChange={e=>setValue(e.target.value)}/><br />
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Item" className={classes.nameField} onChange={e=>setItem(e.target.value)} value={item}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Brand" className={classes.nameField} onChange={e=>setBrand(e.target.value)} value={brand}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Description" className={classes.nameField} onChange={e=>setDescription(e.target.value)} value={description}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Serial Number" className={classes.nameField} onChange={e=>setSerialNumber(e.target.value)} value={serialNumber}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Value" className={classes.nameField} onChange={e=>setValue(e.target.value)} value={value}/><br />
                 
                 <Typography variant="h4" gutterBottom className={classes.Typography2}>
                     Donated to:
                 </Typography>
-                <TextField id="standard-basic" label="Name" className={classes.nameField} onChange={e=>setDonateToName(e.target.value)}/>
-                <TextField id="standard-basic" label="Email" className={classes.container} onChange={e=>setDonateToEmail(e.target.value)}/>
-                <TextField id="standard-basic" label="Phone Number" className={classes.container} onChange={e=>setDonateToPhoneNumber(e.target.value)}/>
-                <TextField id="standard-basic" label="Street Address" className={classes.container} onChange={e=>setDonateToAddress(e.target.value)}/><br />
-                
-                <p>{String(taxForm)}</p>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Name" className={classes.nameField} onChange={e=>setDonateToName(e.target.value)} value={donateToName}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Email" className={classes.nameField} onChange={e=>setDonateToEmail(e.target.value)} value={donateToEmail}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Phone Number" className={classes.nameField} onChange={e=>setDonateToPhoneNumber(e.target.value)} value={donateToPhoneNumber}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Street Address" className={classes.nameField} onChange={e=>setDonateToAddress(e.target.value)} value={donateToAddress}/><br />
+                <div className="switchDiv">
+                <Typography id="standard-basic" className={classes.switchLabel}>Tax form sent to donor?</Typography>
                 <Switch
                 color="primary"
-                onChange={taxValue}
+                onChange={e=>setTaxForm(e.target.checked)}
+                required="false"
+                checked={taxForm}
+                className={classes.switch}
                 />
-                    
-                    {/* <FormGroup row className={classes.checkbox}>
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedA} onChange={e=>setTaxForm(e.target.value)} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Tax form sent to donor?"
-                    /><br />
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedB} onChange={handleChange} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Thank you sent?"
-                    /><br />
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedF} onChange={handleChange} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Entered in QuickBooks?"
-                    />
-                </FormGroup> */}
-            
-                <TextField id="standard-basic" label="Physical BB4K Location" className={classes.container} onChange={e=>setPhysicalLocation(e.target.value)}/>
-                <TextField id="standard-basic" label="Notes" className={classes.container} onChange={e=>setNotes(e.target.value)}/><br />
+                <Typography id="standard-basic" className={classes.switchLabel}>Thank You sent?</Typography>
+                <Switch
+                color="primary"
+                onChange={e=>setThankYou(e.target.checked)}
+                required="false"
+                checked={thankYou}
+                className={classes.switch}
+                />
+                <Typography id="standard-basic" className={classes.switchLabel}>Entered in QuickBooks?</Typography>
+                <Switch
+                color="primary"
+                onChange={e=>setQuickBooks(e.target.checked)}
+                required="false"
+                checked={quickBooks}
+                className={classes.switch}
+                />
+                </div><br />
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Physical BB4K Location" className={classes.container} onChange={e=>setPhysicalLocation(e.target.value)} value={physicalLocation}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Notes" className={classes.container} onChange={e=>setNotes(e.target.value)} value={notes}/><br />
                 <Button variant="contained" color="primary" className={classes.submit} type="submit" >
-                    Submit
+                    Update Item
                 </Button>
             </form>
         </div>

@@ -10,12 +10,12 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Avatar from '@material-ui/core/Avatar';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { Checkbox, MenuItem } from '@material-ui/core/';
+import { MenuItem } from '@material-ui/core/';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button'
 import Switch from '@material-ui/core/Switch';
-import TextField from '@material-ui/core/TextField'
+// import TextField from '@material-ui/core/TextField'
 import moment from 'moment'
 export default props =>{
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +27,15 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
       flexGrow: 1,
+    },
+    buttons:{
+      marginLeft: "20px",
+      float: "right",
+      margin: "20px",
+    },
+    detailTypeographyAbove:{
+      paddingTop: "20px",
+      paddingLeft: "500px",
     },
   }));
 
@@ -66,9 +75,9 @@ const useStyles = makeStyles((theme) => ({
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-      };
+    // const handleChange = (event) => {
+    //     setAuth(event.target.checked);
+    //   };
     
       const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -88,13 +97,6 @@ const useStyles = makeStyles((theme) => ({
     const updateItem =()=>{
       navigate('/update/' + props.id)
     }
-    
-
-    const helpMe =()=>{
-      console.log(item);
-    }
-  
-
     return(
             isAuthenticated && (
     <div className={classes.root}>
@@ -140,49 +142,57 @@ const useStyles = makeStyles((theme) => ({
         </Toolbar>
       </AppBar>
       </ThemeProvider>
-      <Button variant="contained" color="primary" onClick={updateItem}>
-  Update Item
-</Button>
-<Button variant="contained" color="secondary" onClick={deleteItem}>
-  Remove from inventory
-</Button> <br />
-<Typography>Date In: {moment(item.dateIn).isValid() ? moment(item.dateIn).format('LL'): null}</Typography>
-<Typography>Date Out: {item.dateOut}</Typography>
-<Typography>Who Donated: {item.whoDonated}</Typography>
-<Typography>Email: {item.donorEmail}</Typography>
-<Typography>Phone Number: {item.donorPhoneNumber}</Typography>
-<Typography>Address: {item.donorAddress}</Typography>
+      <Button className={classes.buttons} variant="contained" color="primary" onClick={updateItem}>
+        Update Item
+      </Button>
+      <Button className={classes.buttons} variant="contained" color="secondary" onClick={deleteItem}>
+        Remove from inventory
+      </Button> <br />
+<Typography className="detailTypeographyAbove">Date In: {moment(item.dateIn).isValid() ? moment(item.dateIn).format('LL'): null}</Typography>
+<Typography className="detailTypeography">Date Out: {moment(item.dateOut).isValid() ? moment(item.dateOut).format('LL'): null}</Typography>
+<Typography className="detailTypeography">Who Donated: {item.whoDonated}</Typography>
+<Typography className="detailTypeography">Email: {item.donorEmail}</Typography>
+<Typography className="detailTypeography">Phone Number: {item.donorPhoneNumber}</Typography>
+<Typography className="detailTypeography">Address: {item.donorAddress}</Typography>
 <Typography variant="h4" gutterBottom className={classes.Typography1}>
   Equipment Info
 </Typography>
-<Typography>Item: {item.item}</Typography>
-<Typography>Brand: {item.brand}</Typography>
-<Typography>Description: {item.description}</Typography>
-<Typography>Serial Number: {item.serialNumber}</Typography>
-<Typography>Value: {item.value}</Typography>
+<Typography className="detailTypeography">Item: {item.item}</Typography>
+<Typography className="detailTypeography">Brand: {item.brand}</Typography>
+<Typography className="detailTypeography">Description: {item.description}</Typography>
+<Typography className="detailTypeography">Serial Number: {item.serialNumber}</Typography>
+<Typography className="detailTypeography">Value: {item.value}</Typography>
 <Typography variant="h4" gutterBottom className={classes.Typography1}>
   Donated to:
 </Typography>
-<Typography>Name: {item.donateToName}</Typography>
-<Typography>Email: {item.donateToEmail}</Typography>
-<Typography>Phone Number: {item.donateToPhoneNumber}</Typography>
-<Typography>Address: {item.donateToAddress}</Typography>
+<Typography className="detailTypeography">Name: {item.donateToName}</Typography>
+<Typography className="detailTypeography">Email: {item.donateToEmail}</Typography>
+<Typography className="detailTypeography">Phone Number: {item.donateToPhoneNumber}</Typography>
+<Typography className="detailTypeography">Address: {item.donateToAddress}</Typography>
+
+<Typography className="detailTypeography">Tax form sent to donor?: {item.taxForm}</Typography>
 <Switch
         checked={typeof item.taxForm !== 'undefined' ? item.taxForm : false}
-        color="default"
+        color="primary"
         inputProps={{ 'aria-label': 'checkbox with default color' }}
 />
-<Typography>Tax form sent to donor?: {item.taxForm}</Typography>
-<Typography>Thank You sent? {item.thankYou}</Typography>
-<Typography>Entered in QuickBooks? {item.quickBooks}</Typography>
-<Typography>Physical Location: {item.physicalLocation}</Typography>
-<Typography>Notes: {item.notes}</Typography>
-<Button variant="contained" color="primary" onClick={updateItem}>
+<Typography className="detailTypeography">Thank You sent? {item.thankYou}</Typography>
+<Switch
+        checked={typeof item.thankYou !== 'undefined' ? item.thankYou : false}
+        color="primary"
+        inputProps={{ 'aria-label': 'checkbox with default color' }}
+/>
+<Typography className="detailTypeography">Entered in QuickBooks? {item.quickBooks}</Typography>
+<Switch
+        checked={typeof item.quickBooks !== 'undefined' ? item.quickBooks : false}
+        color="primary"
+        inputProps={{ 'aria-label': 'checkbox with default color' }}
+/>
+<Typography className="detailTypeography">Physical Location: {item.physicalLocation}</Typography>
+<Typography className="detailTypeography">Notes: {item.notes}</Typography>
+<Button className={classes.buttons} variant="contained" color="primary" onClick={updateItem}>
   Update Item
 </Button>
-<button onClick={helpMe}>Help</button>
-
-
     </div>
   ));
 }

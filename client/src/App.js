@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
 import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton'
 import {Router} from '@reach/router'
-import HomePage from './components/HomePage';
 import {useAuth0} from '@auth0/auth0-react';
 import Home from './components/HomePage'
 import AddForm from './components/AddForm'
@@ -20,8 +18,6 @@ function App() {
   return (<div>
     <>
       <LoginButton />
-      {/* <LogoutButton /> */}
-      {/* <HomePage /> */}
     </>
     <Router>
       <Home path="/" />

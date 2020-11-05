@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import 'fontsource-roboto'
 import Typography from '@material-ui/core/Typography';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import axios from 'axios'
 import Button from '@material-ui/core/Button'
@@ -135,6 +133,12 @@ export default props =>{
     const taxValue = (e, val) =>{
         setTaxForm(val)
     }    
+    const thankYouValue = (e, val) =>{
+        setThankYou(val)
+    }    
+    const quickBooksValue = (e, val) =>{
+        setQuickBooks(val)
+    }    
     return(
         <div className={classes.root}>
             <form  noValidate autoComplete='false' onSubmit={onSubmitHandler}>
@@ -189,22 +193,14 @@ export default props =>{
                 color="primary"
                 onChange={taxValue}
                 />
-                    
-                    {/* <FormGroup row className={classes.checkbox}>
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedA} onChange={e=>setTaxForm(e.target.value)} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Tax form sent to donor?"
-                    /><br />
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedB} onChange={handleChange} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Thank you sent?"
-                    /><br />
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedF} onChange={handleChange} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Entered in QuickBooks?"
-                    />
-                </FormGroup> */}
-            
+                <Switch
+                color="primary"
+                onChange={thankYouValue}
+                />
+                <Switch
+                color="primary"
+                onChange={quickBooksValue}
+                />
                 <TextField id="standard-basic" label="Physical BB4K Location" className={classes.container} onChange={e=>setPhysicalLocation(e.target.value)}/>
                 <TextField id="standard-basic" label="Notes" className={classes.container} onChange={e=>setNotes(e.target.value)}/><br />
                 <Button variant="contained" color="primary" className={classes.submit} type="submit" >

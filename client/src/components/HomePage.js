@@ -45,15 +45,15 @@ const useStyles = makeStyles((theme) => ({
   });
 
 const HomePage = () => {
-    const {user,logout, isAuthenticated} = useAuth0();
-    const classes = useStyles();
+  const {user,logout, isAuthenticated} = useAuth0();
+  const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
     
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  // const handleChange = (event) => {
+  //   setAuth(event.target.checked);
+  // };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);

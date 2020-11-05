@@ -99,8 +99,8 @@ export default props =>{
             donateToPhoneNumber: donateToPhoneNumber,
             donateToAddress: donateToAddress,
             taxForm: taxForm,
-            // thankYou: thankYou,
-            // quickBooks: quickBooks,
+            thankYou: thankYou,
+            quickBooks: quickBooks,
             physicalLocation: physicalLocation,
             notes: notes
         })
@@ -125,6 +125,12 @@ export default props =>{
 
     const taxValue = (e, val) =>{
         setTaxForm(val)
+    }    
+    const thankYouValue = (e, val) =>{
+        setThankYou(val)
+    }    
+    const quickBooksValue = (e, val) =>{
+        setQuickBooks(val)
     }    
     return(
         <div className={classes.root}>
@@ -178,23 +184,18 @@ export default props =>{
                 <Switch
                 color="primary"
                 onChange={taxValue}
+                required="false"
                 />
-                    
-                    {/* <FormGroup row className={classes.checkbox}>
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedA} onChange={e=>setTaxForm(e.target.value)} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Tax form sent to donor?"
-                    /><br />
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedB} onChange={handleChange} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Thank you sent?"
-                    /><br />
-                    <FormControlLabel
-                        control={<Checkbox checked={state.checkedF} onChange={handleChange} name="checkedA" color="primary" className={classes.container}/>}
-                        label="Entered in QuickBooks?"
-                    />
-                </FormGroup> */}
-            
+                <Switch
+                color="primary"
+                onChange={thankYouValue}
+                required="false"
+                />
+                <Switch
+                color="primary"
+                onChange={quickBooksValue}
+                required="false"
+                />
                 <TextField id="standard-basic" label="Physical BB4K Location" className={classes.container} onChange={e=>setPhysicalLocation(e.target.value)}/>
                 <TextField id="standard-basic" label="Notes" className={classes.container} onChange={e=>setNotes(e.target.value)}/><br />
                 <Button variant="contained" color="primary" className={classes.submit} type="submit" >
