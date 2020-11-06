@@ -62,7 +62,7 @@
   }
 .welcomeloginpage{
     text-align: center;
-    color: chocolate;
+    color: #3e2e67;
 }
 .loginimage {
   display: block;
@@ -72,8 +72,7 @@
 }
 .loginbutton{
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 39%;
   width: 30%;
 }
 .tablehead{
@@ -85,5 +84,17 @@
 }
 .dateInputs {
   margin-bottom: 0px;
-  
+}
+.MuiTypography-root{
+  margin: 5px;
+}
+.results{
+  margin-top: 50px;
+}
+.MuiTypography-subtitle1{
+  color: blue;
+}
+.MuiTypography-displayInline{
+  display: inline;
+  margin-left: 45px;
 }

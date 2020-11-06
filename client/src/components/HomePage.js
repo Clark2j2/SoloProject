@@ -12,9 +12,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { MenuItem } from '@material-ui/core/';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import ItemList from './ItemList'
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
     palette: {
       primary: {
         light: '#757ce8',
-        main: '#ff9900',
+        main: '#3e2e67',
         dark: '#002884',
-        contrastText: 'fff#',
+        contrastText: 'white',
       },
       secondary: {
         light: '#ff7961',
@@ -47,13 +47,9 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = () => {
   const {user,logout, isAuthenticated} = useAuth0();
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-    
-  // const handleChange = (event) => {
-  //   setAuth(event.target.checked);
-  // };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -65,7 +61,7 @@ const HomePage = () => {
   const goToAddItem = () =>{
     navigate('/add/')
   }
-
+  
   return (
     isAuthenticated && (
     <div className={classes.root}>
@@ -111,33 +107,11 @@ const HomePage = () => {
       </AppBar>
       </ThemeProvider>
       <ItemList />
+      <Fab style={{float: "right", marginTop: 20, marginRight: 20}}color="primary" aria-label="add" onClick={goToAddItem}>
+        <AddIcon  />
+      </Fab>
     </div>
   ));
 }
-//     return (
-        // isAuthenticated && (
-//         <div>
-//             <ThemeProvider theme={theme}>
-//             <AppBar position="static">
-//                 <Toolbar>
-//                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-//             <MenuIcon>
-//               <MenuItem onClick={handleClose}>Add a new item</MenuItem>
-//               <MenuItem>Add a new item</MenuItem>
-//             </MenuIcon>
-//         </IconButton>
-//         <Typography variant="h6" className={classes.title}>
-//           Building Blocks - Available Inventory
-//     </Typography>
-    // <Typography>{user.name}  &nbsp; &nbsp;</Typography>
-    // <Avatar alt={user.name} src={user.picture} />
-    // <Button color="inherit" onClick={() => (logout())}>Log Out</Button>
-//   </Toolbar>
-// </AppBar>
-// </ThemeProvider>
-//         </div>)
-//     )
-// }
-
 export default HomePage
 

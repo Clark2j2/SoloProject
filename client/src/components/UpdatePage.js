@@ -16,7 +16,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import TextField from '@material-ui/core/TextField';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button'
-import { InlineWrapper } from '@material-ui/pickers/wrappers/InlineWrapper';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
       width: '253px',
     },
     nameField: {
-        marginLeft: theme.spacing(10),
-        marginRight: theme.spacing(10),
         marginBottom: "2px",
+        marginLeft: "5%",
+        width: "275px"
     },
     Typography1: {
         marginLeft: "36%",
@@ -60,9 +59,6 @@ const useStyles = makeStyles((theme) => ({
     input: {
         width: '300px'
     },
-    root: {
-      flexGrow: 1,
-    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -74,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
     }
       
   }));
-
 
 export default props => {
     const [dateIn, setDateIn] = useState();
@@ -101,7 +96,6 @@ export default props => {
     const {isAuthenticated} = useAuth0();
     const {user,logout} = useAuth0();
     const classes = useStyles();
-
     
     useEffect(() =>{
         axios.get("http://localhost:8000/api/users/" + props.id)
@@ -131,7 +125,7 @@ export default props => {
             console.log(err)
             })
     }, []);
-
+    
     const onSubmitHandler = (e) =>{
         e.preventDefault();
         axios.put('http://localhost:8000/api/users/update/' + props.id, {
@@ -173,15 +167,6 @@ export default props => {
     const navigateHome = ()=>{
         navigate('/');
     }
-    // const taxValue = (e, val) =>{
-    //     setTaxForm(val)
-    // }    
-    // const thankYouValue = (e, val) =>{
-    //   setThankYou(val)
-    // }    
-    // const quickBooksValue = (e, val) =>{
-    //   setQuickBooks(val)
-    // }  
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
       };
@@ -193,14 +178,14 @@ export default props => {
       }
       const [anchorEl, setAnchorEl] = React.useState(null);
       const open = Boolean(anchorEl);
-      const [auth, setAuth] = React.useState(true);
+      const [auth] = React.useState(true);
       const theme = createMuiTheme({
         palette: {
           primary: {
             light: '#757ce8',
-            main: '#ff9900',
+            main: '#3e2e67',
             dark: '#002884',
-            contrastText: 'fff#',
+            contrastText: 'white',
           },
           secondary: {
             light: '#ff7961',
@@ -287,7 +272,7 @@ export default props => {
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Email Address" type="email" className={classes.nameField} onChange={e=>setDonorEmail(e.target.value)} value={donorEmail}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Phone Number" className={classes.nameField} onChange={e=>setDonorPhoneNumber(e.target.value)} value={donorPhoneNumber}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Street Address" className={classes.nameField} onChange={e=>setDonorAddress(e.target.value)} value={donorAddress}/><br />
-            
+                <br /><hr />
                 <Typography variant="h4" gutterBottom className={classes.Typography1}>
                     Equipment Info
                 </Typography>
@@ -296,7 +281,7 @@ export default props => {
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Description" className={classes.nameField} onChange={e=>setDescription(e.target.value)} value={description}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Serial Number" className={classes.nameField} onChange={e=>setSerialNumber(e.target.value)} value={serialNumber}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Value" className={classes.nameField} onChange={e=>setValue(e.target.value)} value={value}/><br />
-                
+                <br /><hr />
                 <Typography variant="h4" gutterBottom className={classes.Typography2}>
                     Donated to:
                 </Typography>
@@ -304,6 +289,7 @@ export default props => {
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Email" className={classes.nameField} onChange={e=>setDonateToEmail(e.target.value)} value={donateToEmail}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Phone Number" className={classes.nameField} onChange={e=>setDonateToPhoneNumber(e.target.value)} value={donateToPhoneNumber}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Street Address" className={classes.nameField} onChange={e=>setDonateToAddress(e.target.value)} value={donateToAddress}/><br />
+                <br /><hr />
                 <div className="switchDiv">
                 <Typography id="standard-basic" className={classes.switchLabel}>Tax form sent to donor?</Typography>
                 <Switch
@@ -330,8 +316,8 @@ export default props => {
                 className={classes.switch}
                 />
                 </div><br />
-                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Physical BB4K Location" className={classes.container} onChange={e=>setPhysicalLocation(e.target.value)} value={physicalLocation}/>
-                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Notes" className={classes.container} onChange={e=>setNotes(e.target.value)} value={notes}/><br />
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Physical BB4K Location" className={classes.nameField} onChange={e=>setPhysicalLocation(e.target.value)} value={physicalLocation}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Notes" className={classes.nameField} onChange={e=>setNotes(e.target.value)} value={notes}/><br />
                 <Button variant="contained" color="primary" className={classes.submit} type="submit" >
                     Update Item
                 </Button>

@@ -11,9 +11,6 @@ import Paper from '@material-ui/core/Paper';
 import axios from 'axios'
 import Button from '@material-ui/core/Button'
 
-
-
-
 const useStyles = makeStyles({
   table: {
     minWidth: 400,
@@ -22,7 +19,6 @@ const useStyles = makeStyles({
       fontSize: 20,
   }
 });
-
   export default function BasicTable() {
     const [item, setItem] = useState([]);
     const classes = useStyles();

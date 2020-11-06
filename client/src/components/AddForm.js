@@ -15,7 +15,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Form from './Form'
 
 export default props => {
-    const {loginWithRedirect, isAuthenticated} = useAuth0();
+    const {isAuthenticated} = useAuth0();
     
     const {user,logout} = useAuth0();
     const handleMenu = (event) => {
@@ -29,7 +29,7 @@ export default props => {
       }
       const [anchorEl, setAnchorEl] = React.useState(null);
       const open = Boolean(anchorEl);
-      const [auth, setAuth] = React.useState(true);
+      const [auth] = React.useState(true);
       const useStyles = makeStyles((theme) => ({
         root: {
           flexGrow: 1,
@@ -45,9 +45,9 @@ export default props => {
         palette: {
           primary: {
             light: '#757ce8',
-            main: '#ff9900',
+            main: '#3e2e67',
             dark: '#002884',
-            contrastText: 'fff#',
+            contrastText: 'white',
           },
           secondary: {
             light: '#ff7961',

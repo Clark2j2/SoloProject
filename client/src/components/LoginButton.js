@@ -15,7 +15,7 @@ const LoginButton = () => {
             text: {
               // Some CSS
               color: 'black',
-              padding: '300px'
+              marginLeft: "40%",
             },
           },
         },
@@ -25,7 +25,7 @@ const LoginButton = () => {
         !isAuthenticated &&(
         <div>
             <h1 className="welcomeloginpage">Building Blocks - Equipment Inventory</h1>
-            <img className="loginimage" src={logo} />
+            <img className="loginimage" src={logo} alt="BB4K Logo" />
             <div className="loginbutton">
             <ThemeProvider theme={theme}>
                 <Button variant="contained" color="primary" onClick={() => console.log(loginWithRedirect())}>
