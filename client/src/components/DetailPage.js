@@ -138,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
 <Typography variant="subtitle1" align="justify" className="detailTypeography" display="inline" ><b>Date Out: </b> {moment(item.dateOut).isValid() ? moment(item.dateOut).format('LL'): null}</Typography>
 <Typography style={{marginTop: 10, marginBottom: 5}}><b>Who Donated: </b>{item.whoDonated}</Typography>
 <Typography style={{marginBottom: 5}} className="detailTypeography"><b>Email:</b> {item.donorEmail}</Typography>
-<Typography className="detailTypeography"><b>Phone Number:</b> {item.donorPhoneNumber}</Typography>
+<Typography className="detailTypeography"><b>Phone Number:</b> {item.donorPhonenumber}</Typography>
 <Typography className="detailTypeography"><b>Address:</b> {item.donorAddress}</Typography>
 <hr />
 <Typography variant="h4" gutterBottom className={classes.Typography1}>
@@ -155,7 +155,7 @@ const useStyles = makeStyles((theme) => ({
 </Typography>
 <Typography className="detailTypeography"><b>Name: </b>{item.donateToName}</Typography>
 <Typography className="detailTypeography"><b>Email: </b>{item.donateToEmail}</Typography>
-<Typography className="detailTypeography"><b>Phone Number: </b>{item.donateToPhoneNumber}</Typography>
+<Typography className="detailTypeography"><b>Phone Number: </b>{item.donateToPhonenumber}</Typography>
 <Typography className="detailTypeography"><b>Address: </b>{item.donateToAddress}</Typography>
 <hr />
 <Typography display="inline" className="detailTypeography"><b>Tax form sent to donor?: </b>{item.taxForm}</Typography>

@@ -76,7 +76,7 @@ export default props => {
     const [dateOut, setDateOut] = useState();
     const [whoDonated, setWhoDonated] = useState("");
     const [donorEmail, setDonorEmail] = useState();
-    const [donorPhoneNumber, setDonorPhoneNumber] = useState();
+    const [donorPhonenumber, setDonorPhonenumber] = useState();
     const [donorAddress, setDonorAddress] = useState();
     const [item, setItem] = useState();
     const [brand, setBrand] = useState();
@@ -85,7 +85,7 @@ export default props => {
     const [value, setValue] = useState();
     const [donateToName, setDonateToName] = useState();
     const [donateToEmail, setDonateToEmail] = useState();
-    const [donateToPhoneNumber, setDonateToPhoneNumber] = useState();
+    const [donateToPhonenumber, setDonateToPhonenumber] = useState();
     const [donateToAddress, setDonateToAddress] = useState();
     const [taxForm, setTaxForm] = React.useState(false);
     const [thankYou, setThankYou] = React.useState(false);
@@ -105,7 +105,7 @@ export default props => {
           setWhoDonated(res.data.user.whoDonated);
           setDonorEmail(res.data.user.donorEmail);
           setDonorAddress(res.data.user.donorAddress);
-          setDonorPhoneNumber(res.data.user.phoneNumber);
+          setDonorPhonenumber(res.data.user.donorPhonenumber);
           setItem(res.data.user.item);
           setBrand(res.data.user.brand);
           setDescription(res.data.user.description);
@@ -113,7 +113,7 @@ export default props => {
           setValue(res.data.user.value);
           setDonateToName(res.data.user.donateToName);
           setDonateToEmail(res.data.user.donateToEmail);
-          setDonateToPhoneNumber(res.data.user.donateToPhoneNumber);
+          setDonateToPhonenumber(res.data.user.donateToPhonenumber);
           setDonateToAddress(res.data.user.donateToAddress);
           setTaxForm(res.data.user.taxForm);
           setThankYou(res.data.user.thankYou);
@@ -133,7 +133,7 @@ export default props => {
             dateOut: dateOut,
             whoDonated: whoDonated,
             donorEmail: donorEmail,
-            donorPhonenumber: donorPhoneNumber,
+            donorPhonenumber: donorPhonenumber,
             donorAddress: donorAddress,
             item: item,
             brand: brand,
@@ -142,7 +142,7 @@ export default props => {
             value: value,
             donateToName: donateToName,
             donateToEmail: donateToEmail,
-            donateToPhoneNumber: donateToPhoneNumber,
+            donateToPhonenumber: donateToPhonenumber,
             donateToAddress: donateToAddress,
             taxForm: taxForm,
             thankYou: thankYou,
@@ -270,7 +270,7 @@ export default props => {
                 </div>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Who donated?" className={classes.nameField} onChange={e=>setWhoDonated(e.target.value)} value={whoDonated} />
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Email Address" type="email" className={classes.nameField} onChange={e=>setDonorEmail(e.target.value)} value={donorEmail}/>
-                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Phone Number" className={classes.nameField} onChange={e=>setDonorPhoneNumber(e.target.value)} value={donorPhoneNumber}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Phone Number" className={classes.nameField} onChange={e=>setDonorPhonenumber(e.target.value)} value={donorPhonenumber}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Street Address" className={classes.nameField} onChange={e=>setDonorAddress(e.target.value)} value={donorAddress}/><br />
                 <br /><hr />
                 <Typography variant="h4" gutterBottom className={classes.Typography1}>
@@ -287,7 +287,7 @@ export default props => {
                 </Typography>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Name" className={classes.nameField} onChange={e=>setDonateToName(e.target.value)} value={donateToName}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Email" className={classes.nameField} onChange={e=>setDonateToEmail(e.target.value)} value={donateToEmail}/>
-                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Phone Number" className={classes.nameField} onChange={e=>setDonateToPhoneNumber(e.target.value)} value={donateToPhoneNumber}/>
+                <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Phone Number" className={classes.nameField} onChange={e=>setDonateToPhonenumber(e.target.value)} value={donateToPhonenumber}/>
                 <TextField InputLabelProps={{ shrink: true }} id="standard-basic" label="Street Address" className={classes.nameField} onChange={e=>setDonateToAddress(e.target.value)} value={donateToAddress}/><br />
                 <br /><hr />
                 <div className="switchDiv">
